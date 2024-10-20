@@ -1,9 +1,9 @@
-function App() {
+import { Card } from './Card'
+
+export function App() {
   return (
     <>
-      <h1>Intro React</h1>
+      <Card />
     </>
   )
 }
-
-export default App
