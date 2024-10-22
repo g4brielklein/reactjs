@@ -4,7 +4,7 @@ import logo from '../assets/logo.svg'
 export function Header() {
     return (
         <header className={ style.header }>
-            <img src={ logo } alt="" />
+            <img src={ logo } alt="App logo" />
             <h1>Series Crud</h1>
         </header>
     )
