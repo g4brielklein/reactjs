@@ -1,6 +1,6 @@
 import { Card } from './Card'
 import { Header } from './components/Header'
-import './style.css'
+import './global.css'
 
 export function App() {
   return (
