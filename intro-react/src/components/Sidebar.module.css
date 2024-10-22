@@ -1,0 +1,8 @@
+.sidebar {
+    background-color: var(--gray-800);
+    border-radius: 0.5 rem;
+}
+
+.coverContainer img {
+    width: 100%;
+}
