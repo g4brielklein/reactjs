@@ -1,8 +1,55 @@
 .sidebar {
     background-color: var(--gray-800);
-    border-radius: 0.5 rem;
+    border-radius: 0.5rem;
 }
 
 .coverContainer img {
     width: 100%;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profilePictureContainer {
+    background-color: var(--gray-800);
+    padding: 3.5px 3.5px 0 3.5px;
+    border: 2px solid var(--green-800);
+    border-radius: 0.5rem;
+    margin-top: -34px;
+}
+
+.userName {
+    padding-top: 1rem;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.userRole {
+    padding-bottom: 1.5rem;
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.6;
+}
+
+.bottomContainer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--gray-600);
+}
+
+.editButton {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    padding: 1rem 0;
+    border: 1px solid var(--green-800);
+    border-radius: 0.5rem;
+}
+
+.editButton p {
+    font-weight: bold;
+    color: var(--green-800);
 }
