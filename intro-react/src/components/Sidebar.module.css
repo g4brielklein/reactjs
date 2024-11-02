@@ -1,11 +1,13 @@
 .sidebar {
     background-color: var(--gray-800);
     border-radius: 0.5rem;
+    overflow: hidden;
 }
 
 .coverContainer img {
     width: 100%;
-    border-radius: 0.5rem 0.5rem 0 0;
+    height: 72px;
+    object-fit: cover;
 }
 
 .mainContainer {
@@ -20,6 +22,11 @@
     border: 2px solid var(--green-800);
     border-radius: 0.5rem;
     margin-top: -34px;
+}
+
+.profilePictureContainer img {
+    width: 50px;
+    border-radius: 0.25rem;
 }
 
 .userName {
