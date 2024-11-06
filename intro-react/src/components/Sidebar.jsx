@@ -1,6 +1,6 @@
 import style from './Sidebar.module.css'
 
-import editIcon from '../assets/edit-icon.svg'
+import { PencilSimpleLine } from "@phosphor-icons/react";
 
 export function Sidebar() {
     // mocked data
@@ -28,7 +28,7 @@ export function Sidebar() {
             </div>
             <div className={ style.bottomContainer }>
                 <div className={ style.editButton }>
-                    <img src={ editIcon } alt="Edit icon" />
+                    <PencilSimpleLine size={20} />
                     <p>Edit your profile</p>
                 </div>
             </div>
