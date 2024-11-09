@@ -1,0 +1,59 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 52rem;
+    background-color: var(--gray-800);
+    border-radius: 8px;
+    padding: 2.5rem;
+    gap: 1.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray-400);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.userContainer {
+    display: flex;
+    gap: 1rem;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userInfo strong {
+    color: var(--gray-100);
+}
+
+.userContainer img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 6px;
+    border: 3.45px solid var(--gray-800);
+    outline: 2px solid var(--green-800);
+    box-sizing: initial;
+    object-fit: cover;
+}
+
+.content {
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.comments {
+    border-top: 1px solid var(--gray-600);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comments strong {
+    color: var(--gray-100)
+}
