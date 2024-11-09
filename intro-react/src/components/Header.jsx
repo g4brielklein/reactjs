@@ -5,7 +5,7 @@ export function Header() {
     return (
         <header className={ style.header }>
             <img src={ logo } alt="App logo" />
-            <h1>Series Crud</h1>
+            <h1>TechHub</h1>
         </header>
     )
 }
