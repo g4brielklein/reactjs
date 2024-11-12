@@ -62,24 +62,29 @@
 
 .comments textarea {
     background-color: var(--gray-900);
-    border: 1px solid var(--green-800);
+    border: none;
     border-radius: 8px;
     resize: none;
     height: 6rem;
-
+    padding: 0.8125rem 1rem;
+    
     color: var(--gray-300);
     line-height: 1.4;
-    padding: 0.8125rem 1rem;
+}
+
+.comments textarea:focus {
+    outline: 1px solid var(--green-800);
 }
 
 .comments button {
     width: 6.75rem;
-    height: 3.06rem;
+    padding: 1rem 1.5rem;
     border-radius: 8px;
     color: var(--white);
     background-color: var(--green-500);
     border: none;
     cursor: pointer;
+    transition: background-color 0.2s;
 
     font-weight: bold;
 }

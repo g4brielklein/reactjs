@@ -23,7 +23,7 @@ export function Card() {
             </div>
             <div className={ style.comments }>
                 <strong>Leave your feedback</strong>
-                <textarea></textarea>
+                <textarea placeholder="Write down a comment..."></textarea>
                 <button>Publish</button>
             </div>
         </div>
