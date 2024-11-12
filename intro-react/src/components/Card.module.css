@@ -83,3 +83,7 @@
 
     font-weight: bold;
 }
+
+.comments button:hover {
+    background-color: var(--green-800);
+}
