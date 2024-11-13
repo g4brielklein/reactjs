@@ -1,6 +1,14 @@
+import React, { useState } from 'react';
+
 import style from './Card.module.css'
 
 export function Card() {
+    const [hasComment, setHasComment] = useState(false)
+
+    const onChangeTextArea = event => {
+        setHasComment(event.target.value.length > 0)
+    }
+
     return (
         <div className={ style.card }>
             <div className={ style.header }>
@@ -23,8 +31,11 @@ export function Card() {
             </div>
             <div className={ style.comments }>
                 <strong>Leave your feedback</strong>
-                <textarea placeholder="Write down a comment..."></textarea>
-                <button>Publish</button>
+                <textarea 
+                    placeholder="Write down a comment..." 
+                    onChange={onChangeTextArea}
+                ></textarea>
+                { hasComment && <button>Publish</button> }
             </div>
         </div>
     )
