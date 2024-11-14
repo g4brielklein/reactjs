@@ -21,8 +21,8 @@
 }
 
 .profilePictureContainer img {
-    width: 3rem;
-    height: 3rem;
+    width: 3.125rem;
+    height: 3.125rem;
     object-fit: cover;
     border-radius: 6px;
     border: 3.45px solid var(--gray-800);
