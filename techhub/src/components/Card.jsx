@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash } from '@phosphor-icons/react';
+import { Trash, ThumbsUp } from '@phosphor-icons/react';
 
 import style from './Card.module.css'
 
@@ -39,6 +39,10 @@ export function Card() {
         setHasComment(event.target.value.length > 0)
     }
 
+    const onClickLike = () => {
+        console.log('clicked like')
+    }
+
     return (
         <>
             { posts.map((post, index) => (
@@ -74,19 +78,28 @@ export function Card() {
                                     src={ comment.user.profileImageUrl } 
                                     alt="User profile picture" 
                                 />
-                                <div className={ style.commentContent }>
-                                    <div className={ style.commentDetails }>
-                                        <div className={ style.commentDetailsAuthor }>
-                                            <strong>{ comment.user.name }</strong>
-                                            <time 
-                                                title={ comment.publishTimeTitle} 
-                                                dateTime={ comment.publishTime }>
-                                                { comment.publishTimeText }
-                                            </time>
+                                <div className={ style.commentSection }>
+                                    <div className={ style.commentContent }>
+                                        <div className={ style.commentDetails }>
+                                            <div className={ style.commentDetailsAuthor }>
+                                                <strong>{ comment.user.name }</strong>
+                                                <time 
+                                                    title={ comment.publishTimeTitle} 
+                                                    dateTime={ comment.publishTime }>
+                                                    { comment.publishTimeText }
+                                                </time>
+                                            </div>
+                                            <Trash className={ style.trashIcon } size={ 24 } />
                                         </div>
-                                        <Trash size={ 24 } />
+                                        <p>{ comment.content }</p>
                                     </div>
-                                    <p>{ comment.content }</p>
+                                    <div className={ style.commentInteraction }>
+                                        <div className={ style.likeArea }>
+                                            <ThumbsUp size={ 20 } onClick={ onClickLike }/>
+                                            <span>Like</span> 
+                                        </div>
+                                        <span>• { comment.likes }</span>
+                                    </div>
                                 </div>
                             </div>
                         )) }
