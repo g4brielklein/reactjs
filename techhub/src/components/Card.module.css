@@ -80,11 +80,13 @@
     line-height: 1.4;
 }
 
-.comments textarea:focus {
+.comments textarea:focus,
+.comments textarea:hover {
     outline: 1px solid var(--green-800);
+    box-shadow: none;
 }
 
-.comments button {
+.comments > button {
     width: 6.75rem;
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -97,12 +99,18 @@
     font-weight: bold;
 }
 
-.comments button:hover {
+.comments > button:hover {
     background-color: var(--green-800);
 }
 
 .comment {
     display: flex;
+    gap: 1rem;
+}
+
+.commentSection {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
@@ -133,7 +141,36 @@
     font-size: 0.750rem;
 }
 
+.commentDetails .trashIcon {
+    cursor: pointer;
+}
+
+.commentDetails .trashIcon:hover {
+    color: red;
+}
+
 .commentDetailsAuthor {
     display: flex;
     flex-direction: column;
+}
+
+.commentInteraction {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-weight: bold;
+    color: var(--gray-400);
+    gap: 0.25rem;
+}
+
+.commentInteraction .likeArea {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer; 
+}
+
+.commentInteraction .likeArea:hover {
+    color: var(--gray-100);
 }
