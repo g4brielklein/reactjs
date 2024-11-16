@@ -1,0 +1,79 @@
+.comment {
+    display: flex;
+    gap: 1rem;
+}
+
+.commentUserPicture {
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 6px;
+    box-sizing: initial;
+    object-fit: cover;
+}
+
+.commentSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commentContent {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-700);
+    width: 42.875rem;
+    border-radius: 8px;
+    padding: 1rem 1rem 1.5625rem;
+    gap: 1rem;
+    
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.commentDetails {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.commentDetails strong {
+    color: var(--gray-100);
+}
+
+.commentDetails time {
+    color: var(--gray5);
+    font-size: 0.750rem;
+}
+
+.commentDetails .trashIcon {
+    cursor: pointer;
+}
+
+.commentDetails .trashIcon:hover {
+    color: var(--red-danger);
+}
+
+.commentDetailsAuthor {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentInteraction {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-weight: bold;
+    color: var(--gray5);
+    gap: 0.25rem;
+}
+
+.commentInteraction .likeArea {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer; 
+}
+
+.commentInteraction .likeArea:hover {
+    color: var(--gray-100);
+}
