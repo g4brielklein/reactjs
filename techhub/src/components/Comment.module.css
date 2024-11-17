@@ -33,6 +33,7 @@
 .commentDetails {
     display: flex;
     justify-content: space-between;    
+    align-items: flex-start;
 }
 
 .commentDetails strong {
@@ -44,11 +45,16 @@
     font-size: 0.750rem;
 }
 
-.commentDetails .trashIcon {
+.commentDetails > button {
     cursor: pointer;
+    line-height: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    color: var(--gray5);
 }
 
-.commentDetails .trashIcon:hover {
+.commentDetails >button :hover {
     color: var(--red-danger);
 }
 
@@ -67,13 +73,18 @@
     gap: 0.25rem;
 }
 
-.commentInteraction .likeArea {
+.likeArea > button {
+    background-color: transparent;
+    border: none;
     display: flex;
     align-items: center;
     gap: 0.625rem;
-    cursor: pointer; 
+    color: var(--gray5);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
-.commentInteraction .likeArea:hover {
+.commentInteraction .likeArea > button:hover {
     color: var(--gray-100);
 }

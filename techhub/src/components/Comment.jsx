@@ -31,18 +31,21 @@ export function Comment(props) {
                                 { comment.publishTimeText }
                             </time>
                         </div>
-                        <Trash 
-                            className={ style.trashIcon } 
-                            size={ 24 } 
-                            onClick={ onClickDelete }
-                        />
+                        <button>
+                            <Trash 
+                                size={ 24 } 
+                                onClick={ onClickDelete }
+                            />
+                        </button>
                     </div>
                     <p>{ comment.content }</p>
                 </div>
                 <div className={ style.commentInteraction }>
                     <div className={ style.likeArea }>
-                        <ThumbsUp size={ 20 } onClick={ onClickLike }/>
-                        <span>Like</span> 
+                        <button onClick={ onClickLike }>
+                            <ThumbsUp size={ 20 } />
+                            <span>Like</span> 
+                        </button>
                     </div>
                     <span>• { comment.likes }</span>
                 </div>
