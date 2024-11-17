@@ -32,15 +32,19 @@ export function Card(props) {
                 <p>{ post.content }</p>
             </div>
             <div className={ style.comments }>
-                <strong>Leave your feedback</strong>
-                <textarea 
-                    placeholder="Write down a comment..." 
-                    onChange={ onChangeTextArea }
-                ></textarea>
-                { hasComment && <button>Publish</button> }
-                { post.comments.map((comment, index) => (
-                    <Comment key={ index } comment={comment} />
-                )) }
+                <div className={ style.commentWriteArea }>
+                    <strong>Leave your feedback</strong>
+                    <textarea 
+                        placeholder="Write down a comment..." 
+                        onChange={ onChangeTextArea }
+                    ></textarea>
+                    { hasComment && <button>Publish</button> }
+                </div>
+                <div className={ style.commentListArea }>
+                    { post.comments.map((comment, index) => (
+                        <Comment key={ index } comment={comment} />
+                    )) }
+                </div>
             </div>
         </div>
     )

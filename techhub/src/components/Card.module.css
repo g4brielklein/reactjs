@@ -52,15 +52,21 @@
     padding-top: 1.5rem;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
+}
+
+.commentWriteArea {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.comments strong {
+.commentWriteArea strong {
     color: var(--gray-100);
     line-height: 1.6;
 }
 
-.comments textarea {
+.commentWriteArea textarea {
     background-color: var(--gray1);
     border: none;
     border-radius: 8px;
@@ -72,13 +78,13 @@
     line-height: 1.4;
 }
 
-.comments textarea:focus,
-.comments textarea:hover {
+.commentWriteArea textarea:focus,
+.commentWriteArea textarea:hover {
     outline: 1px solid var(--green-light);
     box-shadow: none;
 }
 
-.comments > button {
+.commentWriteArea > button {
     width: 6.75rem;
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -91,6 +97,12 @@
     font-weight: bold;
 }
 
-.comments > button:hover {
+.commentWriteArea > button:hover {
     background-color: var(--green-light);
+}
+
+.commentListArea {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }

@@ -30,6 +30,18 @@ export function App() {
           publishTimeText: 'About 2hrs ago',
           publishTimeTitle: 'November 14, 2024, 6:53PM',
           publishTime: '2024-11-14 18:53:43',
+        },
+        {
+          user: {
+            name: 'Kyle Simpson',
+            role: 'Software Developer',
+            profileImageUrl: 'https://github.com/getify.png',
+          },
+          content: 'Awesome!',
+          likes: 32,
+          publishTimeText: 'About 3hrs ago',
+          publishTimeTitle: 'November 14, 2024, 5:53PM',
+          publishTime: '2024-11-14 17:53:43',
         }
       ]
     }
