@@ -17,7 +17,7 @@ export function Card(props) {
         <div className={ style.card }>
             <div className={ style.header }>
                 <div className={ style.userContainer }>
-                    <Avatar imageUrl={ post.user.profileImageUrl } border={ true } />
+                    <Avatar imageUrl={ post.user.profileImageUrl } />
                     <div className={ style.userInfo }>
                         <strong>{ post.user.name }</strong>
                         <span>{ post.user.role }</span>

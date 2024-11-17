@@ -1,7 +1,7 @@
 import style from './Avatar.module.css';
 
 export function Avatar(props) {
-    const { imageUrl, border } = props;
+    const { imageUrl, border = true } = props;
 
     return (
         <img 

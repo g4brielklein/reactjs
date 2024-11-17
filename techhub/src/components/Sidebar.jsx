@@ -23,7 +23,7 @@ export function Sidebar() {
             </div>
             <div className={ style.mainContainer }>
                 <div className={ style.profilePictureContainer }>
-                    <Avatar imageUrl={ user.profilePicImg } border={ true } />
+                    <Avatar imageUrl={ user.profilePicImg } />
                 </div>
                 <strong className={ style.userName }>{ user.name }</strong>
                 <span className={ style.userRole }>{ user.role }</span>

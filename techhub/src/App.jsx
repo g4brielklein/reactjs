@@ -48,7 +48,7 @@ export function App() {
   ]
 
   return (
-    <>
+    <div>
       <Header />
       
       <div className={ style.content }>
@@ -59,6 +59,6 @@ export function App() {
           )) }
         </main>
       </div>
-    </>
+    </div>
   )
 }

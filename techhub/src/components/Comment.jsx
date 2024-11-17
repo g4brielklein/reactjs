@@ -29,7 +29,7 @@ export function Comment(props) {
                                 { comment.publishTimeText }
                             </time>
                         </div>
-                        <button>
+                        <button title="Delete comment">
                             <Trash 
                                 size={ 24 } 
                                 onClick={ onClickDelete }
@@ -40,7 +40,7 @@ export function Comment(props) {
                 </div>
                 <div className={ style.commentInteraction }>
                     <div className={ style.likeArea }>
-                        <button onClick={ onClickLike }>
+                        <button title="Like comment" onClick={ onClickLike }>
                             <ThumbsUp size={ 20 } />
                             <span>Like</span> 
                         </button>
