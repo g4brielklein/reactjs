@@ -47,7 +47,7 @@ export function Comment(props) {
                             <span>Like</span> 
                         </button>
                     </div>
-                    <span>• { comment.likes }</span>
+                    <span>{ comment.likes }</span>
                 </div>
             </div>
         </div>
