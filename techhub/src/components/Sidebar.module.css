@@ -20,16 +20,6 @@
     margin-top: -32px;
 }
 
-.profilePictureContainer img {
-    width: 3.125rem;
-    height: 3.125rem;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 3.45px solid var(--gray2);
-    outline: 2px solid var(--green-light);
-    box-sizing: initial;
-}
-
 .userName {
     padding-top: 1rem;
     font-weight: 800;

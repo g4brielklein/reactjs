@@ -32,16 +32,6 @@
     color: var(--gray-100);
 }
 
-.userPicture {
-    width: 3.125rem;
-    height: 3.125rem;
-    border-radius: 6px;
-    border: 3.45px solid var(--gray2);
-    outline: 2px solid var(--green2);
-    box-sizing: initial;
-    object-fit: cover;
-}
-
 .content {
     line-height: 1.6;
     font-size: 1rem;

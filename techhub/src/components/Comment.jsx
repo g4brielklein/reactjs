@@ -1,5 +1,7 @@
 import { Trash, ThumbsUp } from '@phosphor-icons/react';
 
+import { Avatar } from './Avatar'
+
 import style from './Comment.module.css'
 
 export function Comment(props) {
@@ -15,11 +17,7 @@ export function Comment(props) {
 
     return (
         <div className={ style.comment }>
-            <img 
-                className={ style.commentUserPicture } 
-                src={ comment.user.profileImageUrl } 
-                alt="User profile picture" 
-            />
+            <Avatar imageUrl={ comment.user.profileImageUrl } border={false} />
             <div className={ style.commentSection }>
                 <div className={ style.commentContent }>
                     <div className={ style.commentDetails }>

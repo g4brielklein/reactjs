@@ -3,14 +3,6 @@
     gap: 1rem;
 }
 
-.commentUserPicture {
-    width: 3.125rem;
-    height: 3.125rem;
-    border-radius: 6px;
-    box-sizing: initial;
-    object-fit: cover;
-}
-
 .commentSection {
     display: flex;
     flex-direction: column;

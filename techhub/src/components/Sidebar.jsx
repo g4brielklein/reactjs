@@ -1,4 +1,6 @@
-import style from './Sidebar.module.css'
+import style from './Sidebar.module.css';
+
+import { Avatar } from './Avatar.jsx';
 
 import { PencilSimpleLine } from "@phosphor-icons/react";
 
@@ -21,7 +23,7 @@ export function Sidebar() {
             </div>
             <div className={ style.mainContainer }>
                 <div className={ style.profilePictureContainer }>
-                    <img src={ user.profilePicImg } alt="User profile image" />
+                    <Avatar imageUrl={ user.profilePicImg } border={ true } />
                 </div>
                 <strong className={ style.userName }>{ user.name }</strong>
                 <span className={ style.userRole }>{ user.role }</span>

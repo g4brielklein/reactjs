@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Comment } from './Comment'
+import { Avatar } from './Avatar'
 
 import style from './Card.module.css'
 
@@ -16,11 +17,7 @@ export function Card(props) {
         <div className={ style.card }>
             <div className={ style.header }>
                 <div className={ style.userContainer }>
-                    <img 
-                        className={ style.userPicture } 
-                        src={ post.user.profileImageUrl } 
-                        alt="User profile picture" 
-                    />
+                    <Avatar imageUrl={ post.user.profileImageUrl } border={ true } />
                     <div className={ style.userInfo }>
                         <strong>{ post.user.name }</strong>
                         <span>{ post.user.role }</span>
