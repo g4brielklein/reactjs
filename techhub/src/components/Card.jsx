@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatDistanceToNow, format } from 'date-fns';
 
 import { Comment } from './Comment'
 import { Avatar } from './Avatar'
@@ -23,7 +24,12 @@ export function Card(props) {
                         <span>{ post.user.role }</span>
                     </div>
                 </div>
-                <time title={ post.publishTimeTitle } dateTime={ post.publishTime }>{ post.publishTimeText }</time>
+                <time 
+                    title={ format(post.publishTime, 'LLLL d, yyyy, h:mmaa') } 
+                    dateTime={ format(post.publishTime, 'yyyy/MM/dd HH:mm:ss') }
+                >
+                    Published { formatDistanceToNow(post.publishTime, { addSuffix: true }) }
+                </time>
             </div>
             <div className={ style.content }>
                 <p>{ post.content }</p>
