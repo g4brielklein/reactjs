@@ -1,13 +1,17 @@
 import express from 'express'
 import { randomUUID } from 'node:crypto'
 import { query } from './database/connection.js'
+import cors from 'cors';
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send('GOT /')
+app.get('/posts', async (req, res) => {
+    const posts = await query('SELECT * FROM POSTS')
+
+    res.send(posts)
 })
 
 app.post('/post', async (req, res) => {
