@@ -15,9 +15,8 @@ export function App() {
         profileImageUrl: 'https://github.com/g4brielklein.png',
       },
       content: `Hey everybody, I want to let you guys know that I've just started at a new position as a Software Developer at TechHub! 🚀 #softwareEngineering #development`,
-      publishTimeText: 'Published 1hr ago',
       publishTimeTitle: 'November 7, 2024, 3:11PM',
-      publishTime: '2024-11-07 15:11:25',
+      publishTime: new Date('2024-11-07 16:50:25'),
       comments: [
         {
           user: {
@@ -27,9 +26,8 @@ export function App() {
           },
           content: 'Congrats, man! 👏',
           likes: 3,
-          publishTimeText: 'About 2hrs ago',
           publishTimeTitle: 'November 14, 2024, 6:53PM',
-          publishTime: '2024-11-14 18:53:43',
+          publishTime: new Date('2024-11-14 18:53:43'),
         },
         {
           user: {
@@ -39,9 +37,8 @@ export function App() {
           },
           content: 'Awesome!',
           likes: 32,
-          publishTimeText: 'About 3hrs ago',
           publishTimeTitle: 'November 14, 2024, 5:53PM',
-          publishTime: '2024-11-14 17:53:43',
+          publishTime: new Date('2024-11-17 13:53:43'),
         }
       ]
     }

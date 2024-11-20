@@ -1,4 +1,5 @@
 import { Trash, ThumbsUp } from '@phosphor-icons/react';
+import { formatDistanceToNow } from 'date-fns';
 
 import { Avatar } from './Avatar'
 
@@ -26,7 +27,7 @@ export function Comment(props) {
                             <time 
                                 title={ comment.publishTimeTitle} 
                                 dateTime={ comment.publishTime }>
-                                { comment.publishTimeText }
+                                { formatDistanceToNow(comment.publishTime, { addSuffix: true }) }
                             </time>
                         </div>
                         <button title="Delete comment">
