@@ -18,17 +18,17 @@ export function Card(props) {
         <div className={ style.card }>
             <div className={ style.header }>
                 <div className={ style.userContainer }>
-                    <Avatar imageUrl={ post.user.profileImageUrl } />
+                    {/* <Avatar imageUrl={ post.user.profileImageUrl } /> */}
                     <div className={ style.userInfo }>
-                        <strong>{ post.user.name }</strong>
-                        <span>{ post.user.role }</span>
+                        {/* <strong>{ post.user.name }</strong> */}
+                        {/* <span>{ post.user.role }</span> */}
                     </div>
                 </div>
                 <time 
-                    title={ format(post.publishTime, 'LLLL d, yyyy, h:mmaa') } 
-                    dateTime={ format(post.publishTime, 'yyyy/MM/dd HH:mm:ss') }
+                    title={ format(post.createdAt, 'LLLL d, yyyy, h:mmaa') } 
+                    dateTime={ format(post.createdAt, 'yyyy/MM/dd HH:mm:ss') }
                 >
-                    Published { formatDistanceToNow(post.publishTime, { addSuffix: true }) }
+                    Published { formatDistanceToNow(post.createdAt, { addSuffix: true }) }
                 </time>
             </div>
             <div className={ style.content }>
@@ -44,9 +44,9 @@ export function Card(props) {
                     { hasComment && <button>Publish</button> }
                 </div>
                 <div className={ style.commentListArea }>
-                    { post.comments.map((comment, index) => (
+                    {/* { post.comments.map((comment, index) => (
                         <Comment key={ index } comment={comment} />
-                    )) }
+                    )) } */}
                 </div>
             </div>
         </div>
