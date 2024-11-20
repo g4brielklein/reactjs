@@ -25,10 +25,10 @@ export function Comment(props) {
                         <div className={ style.commentDetailsAuthor }>
                             <strong>{ comment.user.name }</strong>
                             <time 
-                                title={ format(comment.publishTime, 'LLLL d, yyyy, h:mmaa') } 
-                                dateTime={ format(comment.publishTime, 'yyyy/MM/dd HH:mm:ss') }
+                                title={ format(comment.createdAt, 'LLLL d, yyyy, h:mmaa') } 
+                                dateTime={ format(comment.createdAt, 'yyyy/MM/dd HH:mm:ss') }
                             >
-                                { formatDistanceToNow(comment.publishTime, { addSuffix: true }) }
+                                { formatDistanceToNow(comment.createdAt, { addSuffix: true }) }
                             </time>
                         </div>
                         <button title="Delete comment">

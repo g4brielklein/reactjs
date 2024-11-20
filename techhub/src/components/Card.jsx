@@ -8,20 +8,49 @@ import style from './Card.module.css'
 
 export function Card(props) {
     const { post } = props;
-    const [hasComment, setHasComment] = useState(false)
+    const [isTyping, setIsTyping] = useState(false)
+    const [comments, setComments] = useState([{
+        content: 'Congrats, man! 👏',
+        createdAt: new Date('2024-11-01'),
+        likes: 33,
+        user: {
+            name: 'Kyle Simpson',
+            profileImageUrl: 'https://github.com/getify.png'
+        }
+    }])
+    const [comment, setComment] = useState('')
 
     const onChangeTextArea = event => {
-        setHasComment(event.target.value.length > 0)
+        const newValue= event.target.value
+
+        setComment(newValue)
+        
+        setIsTyping(newValue.length > 0)
+    }
+
+    const onPostComment = () => {
+        setComments([{
+            content: comment,
+            createdAt: new Date(),
+            likes: 0,
+            user: {
+                name: 'Gabriel Klein',
+                profileImageUrl: 'https://github.com/g4brielklein.png'
+            }
+        }, ...comments])
+
+        setIsTyping(false)
+        setComment('')
     }
 
     return (
         <div className={ style.card }>
             <div className={ style.header }>
                 <div className={ style.userContainer }>
-                    {/* <Avatar imageUrl={ post.user.profileImageUrl } /> */}
+                    <Avatar imageUrl={ post.user.profileImageUrl } />
                     <div className={ style.userInfo }>
-                        {/* <strong>{ post.user.name }</strong> */}
-                        {/* <span>{ post.user.role }</span> */}
+                        <strong>{ post.user.name }</strong>
+                        <span>{ post.user.role }</span>
                     </div>
                 </div>
                 <time 
@@ -40,13 +69,14 @@ export function Card(props) {
                     <textarea 
                         placeholder="Write down a comment..." 
                         onChange={ onChangeTextArea }
+                        value={ comment }
                     ></textarea>
-                    { hasComment && <button>Publish</button> }
+                    { isTyping && <button onClick={onPostComment}>Publish</button> }
                 </div>
                 <div className={ style.commentListArea }>
-                    {/* { post.comments.map((comment, index) => (
+                    { comments?.map((comment, index) => (
                         <Comment key={ index } comment={comment} />
-                    )) } */}
+                    )) }
                 </div>
             </div>
         </div>
