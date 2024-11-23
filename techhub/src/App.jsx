@@ -64,8 +64,8 @@ export function App() {
       <div className={ style.content }>
         <Sidebar />
         <main className={ style.feed }>
-          { posts.map((post, index) => (
-            <Card post={ post } key={ index } />
+          { posts.map(post => (
+            <Card post={ post } key={ post.id } />
           )) }
         </main>
       </div>

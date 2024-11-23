@@ -10,6 +10,7 @@ export function Card(props) {
     const { post } = props;
     const [isTyping, setIsTyping] = useState(false)
     const [comments, setComments] = useState([{
+        id: 1,
         content: 'Congrats, man! 👏',
         createdAt: new Date('2024-11-01'),
         likes: 33,
@@ -30,6 +31,7 @@ export function Card(props) {
 
     const onPostComment = () => {
         setComments([{
+            id: comments[comments.length - 1].id++,
             content: comment,
             createdAt: new Date(),
             likes: 0,
@@ -74,8 +76,8 @@ export function Card(props) {
                     { isTyping && <button onClick={onPostComment}>Publish</button> }
                 </div>
                 <div className={ style.commentListArea }>
-                    { comments?.map((comment, index) => (
-                        <Comment key={ index } comment={comment} />
+                    { comments?.map(comment => (
+                        <Comment key={comment.id} comment={comment} />
                     )) }
                 </div>
             </div>
