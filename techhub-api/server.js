@@ -9,7 +9,17 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/posts', async (req, res) => {
-    const posts = await query('SELECT * FROM POSTS')
+    const posts = await query(
+        `SELECT posts.*,
+            json_build_object (
+                'id', users.id,
+                'name', users.name,
+                'role', users.role,
+                'profileImageUrl', users.profileImageUrl
+            ) AS "user"
+        FROM posts
+        INNER JOIN users ON users.id = posts."authorId";
+    `)
 
     res.send(posts)
 })
