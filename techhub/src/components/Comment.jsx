@@ -6,11 +6,7 @@ import { Avatar } from './Avatar'
 import style from './Comment.module.css'
 
 export function Comment(props) {
-    const { comment } = props;
-
-    const onClickDelete = () => {
-        console.log('clicked delete')
-    }
+    const { comment, onDelete } = props;
 
     const onClickLike = () => {
         console.log('clicked like')
@@ -34,7 +30,7 @@ export function Comment(props) {
                         <button title="Delete comment">
                             <Trash 
                                 size={ 24 } 
-                                onClick={ onClickDelete }
+                                onClick={() => onDelete(comment.id)}
                             />
                         </button>
                     </div>

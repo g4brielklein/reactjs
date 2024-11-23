@@ -29,9 +29,11 @@ export function Card(props) {
         setIsTyping(newValue.length > 0)
     }
 
-    const onPostComment = () => {
+    const handlePostComment = () => {
+        const id = comments[comments.length - 1] ? comments[comments.length - 1].id++ : 0
+
         setComments([{
-            id: comments[comments.length - 1].id++,
+            id,
             content: comment,
             createdAt: new Date(),
             likes: 0,
@@ -43,6 +45,16 @@ export function Card(props) {
 
         setIsTyping(false)
         setComment('')
+    }
+
+    const handleDeleteComment = (commentId) => {
+        const itemToRemove = comments.findIndex(item => item.id === commentId)
+
+        if (itemToRemove !== -1) {
+            comments.splice(itemToRemove, 1)
+    
+            setComments([...comments])
+        }
     }
 
     return (
@@ -73,11 +85,11 @@ export function Card(props) {
                         onChange={ onChangeTextArea }
                         value={ comment }
                     ></textarea>
-                    { isTyping && <button onClick={onPostComment}>Publish</button> }
+                    { isTyping && <button onClick={handlePostComment}>Publish</button> }
                 </div>
                 <div className={ style.commentListArea }>
                     { comments?.map(comment => (
-                        <Comment key={comment.id} comment={comment} />
+                        <Comment key={comment.id} comment={comment} onDelete={handleDeleteComment}/>
                     )) }
                 </div>
             </div>
