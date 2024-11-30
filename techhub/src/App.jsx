@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useSWR from 'swr'
 
 import axios from 'axios'
 
@@ -12,15 +13,18 @@ import style from './App.module.css'
 export function App() {
   const [posts, setPosts] = useState([]);
 
+  const { data, error, isLoading } = useSWR('http://localhost:3000/posts', fetcher);
+
+  async function fetcher(key) {
+    const response = await axios.get(key);
+    return response.data;
+  }
+
   useEffect(() => {
-    const getPosts = async () => {
-      const response = await axios.get('http://localhost:3000/posts');
-
-      setPosts(response.data)
+    if (data) {
+      setPosts(data)
     }
-
-    getPosts()
-  }, [])
+  }, [data])
 
   // mocked data
   // const posts = [
