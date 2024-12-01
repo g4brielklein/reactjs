@@ -21,6 +21,8 @@ export function Card(props) {
     }])
     const [comment, setComment] = useState('')
 
+    const isCommentEmpty = comment.length === 0
+
     const onChangeTextArea = event => {
         const newValue= event.target.value
 
@@ -30,6 +32,10 @@ export function Card(props) {
     }
 
     const handlePostComment = () => {
+        if (!comment) {
+            return alert('Please fill the comment section first')
+        }
+
         const id = comments[comments.length - 1] ? comments[comments.length - 1].id++ : 0
 
         setComments([{
@@ -85,7 +91,7 @@ export function Card(props) {
                         onChange={ onChangeTextArea }
                         value={ comment }
                     ></textarea>
-                    { isTyping && <button onClick={handlePostComment}>Publish</button> }
+                    { isTyping && <button disabled={isCommentEmpty} onClick={handlePostComment}>Publish</button> }
                 </div>
                 <div className={ style.commentListArea }>
                     { comments?.map(comment => (

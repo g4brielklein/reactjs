@@ -87,7 +87,12 @@
     font-weight: bold;
 }
 
-.commentWriteArea > button:hover {
+.commentWriteArea > button:disabled {
+    cursor: not-allowed;
+    background-color: var(--gray5);
+}
+
+.commentWriteArea > button:not(:disabled):hover {
     background-color: var(--green-light);
 }
 
