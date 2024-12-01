@@ -8,7 +8,13 @@ import { Avatar } from './Avatar'
 import style from './Comment.module.css'
 
 export function Comment(props) {
-    const { comment, onDelete, onLike } = props;
+    const { comment, onDelete } = props;
+    const [likes, setLikes] = useState(comment.likes)
+
+    const handleCommentLike = () => {
+        const updatedLikesCount = likes + 1
+        setLikes(updatedLikesCount)
+    }
 
     return (
         <div className={ style.comment }>
@@ -36,12 +42,12 @@ export function Comment(props) {
                 </div>
                 <div className={ style.commentInteraction }>
                     <div className={ style.likeArea }>
-                        <button title="Like comment" onClick={() => onLike(comment.id)}>
+                        <button title="Like comment" onClick={handleCommentLike}>
                             <ThumbsUp size={ 20 } />
                             <span>Like</span> 
                         </button>
                     </div>
-                    <span>{ comment.likes }</span>
+                    <span>{ likes }</span>
                 </div>
             </div>
         </div>

@@ -63,15 +63,6 @@ export function Card(props) {
         }
     }
 
-    const handleLikeComment = (commentId) => {
-        const commentIndex = comments.findIndex(comment => comment.id === commentId)
-
-        if (commentIndex !== -1) {
-            comments[commentIndex].likes++
-            setComments([...comments])
-        }
-    }
-
     return (
         <div className={ style.card }>
             <div className={ style.header }>
@@ -108,7 +99,6 @@ export function Card(props) {
                             key={comment.id} 
                             comment={comment} 
                             onDelete={handleDeleteComment}
-                            onLike={handleLikeComment}
                         />
                     )) }
                 </div>
