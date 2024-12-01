@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Trash, ThumbsUp } from '@phosphor-icons/react';
 import { formatDistanceToNow, format } from 'date-fns';
 
@@ -6,11 +8,7 @@ import { Avatar } from './Avatar'
 import style from './Comment.module.css'
 
 export function Comment(props) {
-    const { comment, onDelete } = props;
-
-    const onClickLike = () => {
-        console.log('clicked like')
-    }
+    const { comment, onDelete, onLike } = props;
 
     return (
         <div className={ style.comment }>
@@ -38,7 +36,7 @@ export function Comment(props) {
                 </div>
                 <div className={ style.commentInteraction }>
                     <div className={ style.likeArea }>
-                        <button title="Like comment" onClick={ onClickLike }>
+                        <button title="Like comment" onClick={() => onLike(comment.id)}>
                             <ThumbsUp size={ 20 } />
                             <span>Like</span> 
                         </button>
