@@ -40,6 +40,31 @@ app.post('/post', async (req, res) => {
     res.status(201).send()
 })
 
+app.post('/:postId/comment', async (req, res) => {
+    const { postId } = req.params;
+    const { content } = req.body;
+
+    const postQuery = {
+        text: 'SELECT id FROM posts WHERE id = $1;',
+        values: [postId],
+    }
+
+    const post = await query(postQuery)
+
+    if (!post.length) {
+        res.status(404).send(`Post with id ${postId} not found`)
+    }
+
+    const creationQuery = {
+        text: `INSERT INTO comments (id, content, "authorId", "postId") VALUES ($1, $2, $3, $4);`,
+        values: ['0', content, '1', postId]
+    }
+
+    await query(creationQuery)
+
+    res.status(201).send()
+})
+
 const PORT = 3000
 
 app.listen(3000, () => {
