@@ -43,6 +43,7 @@ app.post('/post', async (req, res) => {
 app.post('/:postId/comment', async (req, res) => {
     const { postId } = req.params;
     const { content } = req.body;
+    const id = randomUUID()
 
     const postQuery = {
         text: 'SELECT id FROM posts WHERE id = $1;',
@@ -57,7 +58,7 @@ app.post('/:postId/comment', async (req, res) => {
 
     const creationQuery = {
         text: `INSERT INTO comments (id, content, "authorId", "postId") VALUES ($1, $2, $3, $4);`,
-        values: ['0', content, '1', postId]
+        values: [id, content, '1', postId]
     }
 
     await query(creationQuery)
