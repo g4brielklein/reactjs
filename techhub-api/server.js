@@ -9,16 +9,30 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/posts', async (req, res) => {
-    const posts = await query(
-        `SELECT posts.*,
+    const posts = await query(`
+        SELECT posts.*,
             json_build_object (
                 'id', users.id,
                 'name', users.name,
                 'role', users.role,
                 'profileImageUrl', users.profileImageUrl
-            ) AS "user"
+            ) AS "user",
+            COALESCE(
+                json_agg(
+                    json_build_object (
+                        'id', comments.id,
+                        'content', comments.content,
+                        'authorId', comments."authorId",
+                        'postId', comments."postId",
+                        'createdAt', comments."createdAt"
+                    )
+                ) FILTER (WHERE comments.id IS NOT NULL),
+                '[]'::json
+            ) AS "comments"
         FROM posts
-        INNER JOIN users ON users.id = posts."authorId";
+        INNER JOIN users ON users.id = posts."authorId"
+        LEFT JOIN comments ON comments."postId" = posts.id
+        GROUP BY posts.id, users.id;
     `)
 
     res.send(posts)
@@ -42,7 +56,7 @@ app.post('/post', async (req, res) => {
 
 app.post('/:postId/comment', async (req, res) => {
     const { postId } = req.params;
-    const { content } = req.body;
+    const { content, authorId } = req.body;
     const id = randomUUID()
 
     const postQuery = {
@@ -58,7 +72,7 @@ app.post('/:postId/comment', async (req, res) => {
 
     const creationQuery = {
         text: `INSERT INTO comments (id, content, "authorId", "postId") VALUES ($1, $2, $3, $4);`,
-        values: [id, content, '1', postId]
+        values: [id, content, authorId, postId]
     }
 
     await query(creationQuery)
