@@ -87,6 +87,19 @@ app.post('/:postId/comment', async (req, res) => {
     res.status(201).send()
 })
 
+app.patch('/:postId/:commentId/likes', (req, res) => {
+    const { postId, commentId } = req.params;
+
+    query(`
+        UPDATE comments
+        SET likes = likes + 1
+        WHERE "postId" = '${postId}'
+        AND id = '${commentId}'
+    `)
+
+    res.status(204).send()
+})
+
 const PORT = 3000
 
 app.listen(3000, () => {
