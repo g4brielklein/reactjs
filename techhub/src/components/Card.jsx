@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow, format } from 'date-fns';
 
+import axios from 'axios';
+
 import { Comment } from './Comment'
 import { Avatar } from './Avatar'
 
@@ -9,16 +11,7 @@ import style from './Card.module.css'
 export function Card(props) {
     const { post } = props;
     const [isTyping, setIsTyping] = useState(false)
-    const [comments, setComments] = useState([{
-        id: 1,
-        content: 'Congrats, man! 👏',
-        createdAt: new Date('2024-11-01'),
-        likes: 33,
-        user: {
-            name: 'Kyle Simpson',
-            profileImageUrl: 'https://github.com/getify.png'
-        }
-    }])
+    const [comments, setComments] = useState(post.comments)
     const [comment, setComment] = useState('')
 
     const isCommentEmpty = comment.length === 0
@@ -48,6 +41,11 @@ export function Card(props) {
                 profileImageUrl: 'https://github.com/g4brielklein.png'
             }
         }, ...comments])
+
+        axios.post(`http://localhost:3000/${post.id}/comment`, {
+            content: comment,
+            authorId: '1'
+        })
 
         setIsTyping(false)
         setComment('')
