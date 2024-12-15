@@ -15,7 +15,7 @@ app.get('/posts', async (req, res) => {
                 'id', users.id,
                 'name', users.name,
                 'role', users.role,
-                'profileImageUrl', users.profileImageUrl
+                'profileImageUrl', users."profileImageUrl"
             ) AS "user",
             COALESCE(
                 json_agg(
@@ -24,7 +24,13 @@ app.get('/posts', async (req, res) => {
                         'content', comments.content,
                         'authorId', comments."authorId",
                         'postId', comments."postId",
-                        'createdAt', comments."createdAt"
+                        'createdAt', comments."createdAt",
+                        'likes', comments.likes,
+                        'user', json_build_object (
+                            'id', comment_author.id,
+                            'name', comment_author.name,
+                            'profileImageUrl', comment_author."profileImageUrl"
+                        )
                     )
                 ) FILTER (WHERE comments.id IS NOT NULL),
                 '[]'::json
@@ -32,6 +38,7 @@ app.get('/posts', async (req, res) => {
         FROM posts
         INNER JOIN users ON users.id = posts."authorId"
         LEFT JOIN comments ON comments."postId" = posts.id
+        LEFT JOIN users comment_author ON comment_author.id = comments."authorId"
         GROUP BY posts.id, users.id;
     `)
 
