@@ -3,17 +3,21 @@ import { useState } from 'react';
 import { Trash, ThumbsUp } from '@phosphor-icons/react';
 import { formatDistanceToNow, format } from 'date-fns';
 
+import axios from 'axios';
+
 import { Avatar } from './Avatar'
 
 import style from './Comment.module.css'
 
 export function Comment(props) {
-    const { comment, onDelete } = props;
+    const { comment, post, onDelete } = props;
     const [likes, setLikes] = useState(comment.likes)
 
     const handleCommentLike = () => {
         const updatedLikesCount = likes + 1
         setLikes(updatedLikesCount)
+
+        axios.patch(`http://localhost:3000/${post.id}/${comment.id}/likes`);
     }
 
     return (

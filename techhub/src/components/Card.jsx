@@ -96,6 +96,7 @@ export function Card(props) {
                         <Comment 
                             key={comment.id} 
                             comment={comment} 
+                            post={post}
                             onDelete={handleDeleteComment}
                         />
                     )) }
