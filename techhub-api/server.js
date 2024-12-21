@@ -88,15 +88,37 @@ app.post('/:postId/comment', async (req, res) => {
     res.status(201).send()
 })
 
-app.patch('/:postId/:commentId/likes', (req, res) => {
+app.patch('/:postId/:commentId/likes', async (req, res) => {
     const { postId, commentId } = req.params;
 
-    query(`
-        UPDATE comments
-        SET likes = likes + 1
-        WHERE "postId" = '${postId}'
-        AND id = '${commentId}'
-    `)
+    const queryPost = {
+        text: `SELECT id from posts WHERE id = $1;`,
+        values: [postId],
+    }
+
+    const post = await query(queryPost)
+
+    if (!post.length) {
+        return res.status(404).send(`Post with id ${postId} not found`)
+    }
+
+    const queryComment = {
+        text: `SELECT id from comments WHERE id = $1;`,
+        values: [commentId],
+    }
+
+    const comment = await query(queryComment)
+
+    if (!comment.length) {
+        return res.status(404).send(`Comment with id ${commentId} not found`)
+    }
+
+    const queryData = {
+        text: `UPDATE comments SET likes = likes + 1 WHERE "postId" = $1 AND id = $2;`,
+        values: [postId, commentId]
+    }
+
+    await query(queryData)
 
     res.status(204).send()
 })
