@@ -88,6 +88,23 @@ app.post('/:postId/comment', async (req, res) => {
     res.status(201).send()
 })
 
+app.get('/:postId/comments', async (req, res) => {
+    const { postId } = req.params;
+
+    const queryData = {
+        text: 'SELECT * FROM comments WHERE "postId" = $1;',
+        values: [postId],
+    };
+
+    const comments = await query(queryData);
+
+    if (!comments.length) {
+        return res.status(404).send(`Post with id ${postId} don't have comments yet`);
+    }
+
+    res.send(comments);
+})
+
 app.patch('/:postId/:commentId/likes', async (req, res) => {
     const { postId, commentId } = req.params;
 
