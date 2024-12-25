@@ -24,27 +24,23 @@ export function Card(props) {
         setIsTyping(newValue.length > 0)
     }
 
+    function reloadPostComments() {
+        axios.get(`http://localhost:3000/${post.id}/comments`)
+            .then(comments => {
+                console.log(comments.data)
+            })
+    }
+
     const handlePostComment = () => {
         if (!comment) {
             return alert('Please fill the comment section first')
         }
 
-        const id = comments[comments.length - 1] ? comments[comments.length - 1].id++ : 0
-
-        setComments([{
-            id,
-            content: comment,
-            createdAt: new Date(),
-            likes: 0,
-            user: {
-                name: 'Gabriel Klein',
-                profileImageUrl: 'https://github.com/g4brielklein.png'
-            }
-        }, ...comments])
-
         axios.post(`http://localhost:3000/${post.id}/comment`, {
             content: comment,
             authorId: '1'
+        }).then(() => {
+            reloadPostComments()
         })
 
         setIsTyping(false)
