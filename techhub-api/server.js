@@ -3,6 +3,8 @@ import { randomUUID } from 'node:crypto'
 import { query } from './database/connection.js'
 import cors from 'cors';
 
+import { ResourceNotFoundError } from './errors.js';
+
 const app = express()
 
 app.use(express.json())
@@ -108,36 +110,47 @@ app.get('/:postId/comments', async (req, res) => {
 app.patch('/:postId/:commentId/likes', async (req, res) => {
     const { postId, commentId } = req.params;
 
-    const queryPost = {
-        text: `SELECT id from posts WHERE id = $1;`,
-        values: [postId],
+    try {
+        const queryPost = {
+            text: `SELECT id from posts WHERE id = $1;`,
+            values: [postId],
+        }
+    
+        const post = await query(queryPost)
+    
+        if (!post.length) {
+            throw new ResourceNotFoundError({
+                message: `Post with id ${postId} not found`,
+                statusCode: 404,
+            })
+        }
+    
+        const queryComment = {
+            text: `SELECT id from comments WHERE id = $1;`,
+            values: [commentId],
+        }
+    
+        const comment = await query(queryComment)
+    
+        if (!comment.length) {
+            throw new ResourceNotFoundError({
+                message: `Comment with id ${commentId} not found`,
+                statusCode: 404,
+            });
+        }
+    
+        const queryData = {
+            text: `UPDATE comments SET likes = likes + 1 WHERE "postId" = $1 AND id = $2;`,
+            values: [postId, commentId]
+        }
+    
+        await query(queryData)
+    
+        res.status(204).send()
+    } catch(err) {
+        console.error(err)
+        return res.status(err.statusCode).json(err)
     }
-
-    const post = await query(queryPost)
-
-    if (!post.length) {
-        return res.status(404).send(`Post with id ${postId} not found`)
-    }
-
-    const queryComment = {
-        text: `SELECT id from comments WHERE id = $1;`,
-        values: [commentId],
-    }
-
-    const comment = await query(queryComment)
-
-    if (!comment.length) {
-        return res.status(404).send(`Comment with id ${commentId} not found`)
-    }
-
-    const queryData = {
-        text: `UPDATE comments SET likes = likes + 1 WHERE "postId" = $1 AND id = $2;`,
-        values: [postId, commentId]
-    }
-
-    await query(queryData)
-
-    res.status(204).send()
 })
 
 const PORT = 3000
