@@ -107,24 +107,10 @@ app.get('/:postId/comments', async (req, res) => {
     res.send(comments);
 })
 
-app.patch('/:postId/:commentId/likes', async (req, res) => {
-    const { postId, commentId } = req.params;
+app.patch('/:commentId/likes', async (req, res) => {
+    const { commentId } = req.params;
 
     try {
-        const queryPost = {
-            text: `SELECT id from posts WHERE id = $1;`,
-            values: [postId],
-        }
-    
-        const post = await query(queryPost)
-    
-        if (!post.length) {
-            throw new ResourceNotFoundError({
-                message: `Post with id ${postId} not found`,
-                statusCode: 404,
-            })
-        }
-    
         const queryComment = {
             text: `SELECT id from comments WHERE id = $1;`,
             values: [commentId],
@@ -140,8 +126,8 @@ app.patch('/:postId/:commentId/likes', async (req, res) => {
         }
     
         const queryData = {
-            text: `UPDATE comments SET likes = likes + 1 WHERE "postId" = $1 AND id = $2;`,
-            values: [postId, commentId]
+            text: `UPDATE comments SET likes = likes + 1 WHERE id = $1;`,
+            values: [commentId]
         }
     
         await query(queryData)

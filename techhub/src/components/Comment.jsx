@@ -17,7 +17,7 @@ export function Comment(props) {
         const updatedLikesCount = likes + 1
         setLikes(updatedLikesCount)
 
-        axios.patch(`http://localhost:3000/${post.id}/${comment.id}/likes`);
+        axios.patch(`http://localhost:3000/${comment.id}/likes`);
     }
 
     return (
