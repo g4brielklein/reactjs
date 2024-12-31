@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { query } from './database/connection.js'
 import cors from 'cors';
 
-import { ResourceNotFoundError } from './errors.js';
+import { InternalServerError, ResourceNotFoundError } from './errors.js';
 
 const app = express()
 
@@ -69,25 +69,30 @@ app.post('/:postId/comment', async (req, res) => {
     const id = randomUUID()
     const createdAt = new Date().toISOString();
 
-    const postQuery = {
-        text: 'SELECT id FROM posts WHERE id = $1;',
-        values: [postId],
+    try {
+        const postQuery = {
+            text: 'SELECT id FROM posts WHERE id = $1;',
+            values: [postId],
+        }
+
+        const post = await query(postQuery)
+
+        if (!post.length) {
+            throw new ResourceNotFoundError(`Post with id ${postId} not found`);
+        }
+
+        const creationQuery = {
+            text: `INSERT INTO comments (id, content, "authorId", "postId", "createdAt") VALUES ($1, $2, $3, $4, $5);`,
+            values: [id, content, authorId, postId, createdAt]
+        }
+
+        await query(creationQuery)
+
+        res.status(201).send()
+    } catch (err) {
+        console.error(err);
+        res.status(err.statusCode).json(err);
     }
-
-    const post = await query(postQuery)
-
-    if (!post.length) {
-        res.status(404).send(`Post with id ${postId} not found`)
-    }
-
-    const creationQuery = {
-        text: `INSERT INTO comments (id, content, "authorId", "postId", "createdAt") VALUES ($1, $2, $3, $4, $5);`,
-        values: [id, content, authorId, postId, createdAt]
-    }
-
-    await query(creationQuery)
-
-    res.status(201).send()
 })
 
 app.get('/:postId/comments', async (req, res) => {
@@ -99,10 +104,6 @@ app.get('/:postId/comments', async (req, res) => {
     };
 
     const comments = await query(queryData);
-
-    if (!comments.length) {
-        return res.status(404).send(`Post with id ${postId} don't have comments yet`);
-    }
 
     res.send(comments);
 })
@@ -119,10 +120,7 @@ app.patch('/:commentId/likes', async (req, res) => {
         const comment = await query(queryComment)
     
         if (!comment.length) {
-            throw new ResourceNotFoundError({
-                message: `Comment with id ${commentId} not found`,
-                statusCode: 404,
-            });
+            throw new InternalServerError(`Comment with id ${commentId} not found`);
         }
     
         const queryData = {
