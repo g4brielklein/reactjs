@@ -155,17 +155,28 @@ app.delete('/:commentId', async (req, res) => {
     const { commentId } = req.params;
 
     try {
+        const queryComment = {
+            text: 'SELECT id FROM comments WHERE id = $1;',
+            values: [commentId],
+        };
+
+        const comment = await query(queryComment);
+
+        if (!comment.length) {
+            throw new ResourceNotFoundError(`Comment with id ${commentId} not found`);
+        };
+
         const queryData = {
             text: 'DELETE FROM comments WHERE id = $1;',
             values: [commentId],
-        }
+        };
     
         await query(queryData);
     
         res.status(204).send();
     } catch(err) {
         console.error(err);
-        res.status(500).send();
+        res.status(err.statusCode).json(err);
     }
 })
 
