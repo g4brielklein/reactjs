@@ -8,6 +8,8 @@ import { Avatar } from './Avatar'
 
 import style from './Card.module.css'
 
+const baseApiUrl = 'http://localhost:3000'
+
 export function Card(props) {
     const { post } = props;
     const [isTyping, setIsTyping] = useState(false)
@@ -25,7 +27,7 @@ export function Card(props) {
     }
 
     function reloadPostComments() {
-        axios.get(`http://localhost:3000/${post.id}/comments`)
+        axios.get(`${baseApiUrl}/${post.id}/comments`)
             .then(comments => {
                 setComments(comments.data)
             })
@@ -36,7 +38,7 @@ export function Card(props) {
             return alert('Please fill the comment section first')
         }
 
-        axios.post(`http://localhost:3000/${post.id}/comment`, {
+        axios.post(`${baseApiUrl}/${post.id}/comment`, {
             content: comment,
             authorId: '1'
         }).then(() => {
@@ -47,10 +49,12 @@ export function Card(props) {
         setComment('')
     }
 
-    const handleDeleteComment = (commentId) => {
+    const handleDeleteComment = async (commentId) => {
         const itemToRemove = comments.findIndex(item => item.id === commentId)
 
-        if (itemToRemove !== -1) {
+        const response = await axios.delete(`${baseApiUrl}/${commentId}`)
+
+        if (itemToRemove !== -1 && response.status === 204) {
             comments.splice(itemToRemove, 1)
     
             setComments([...comments])

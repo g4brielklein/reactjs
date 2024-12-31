@@ -151,6 +151,24 @@ app.patch('/:commentId/likes', async (req, res) => {
     }
 })
 
+app.delete('/:commentId', async (req, res) => {
+    const { commentId } = req.params;
+
+    try {
+        const queryData = {
+            text: 'DELETE FROM comments WHERE id = $1;',
+            values: [commentId],
+        }
+    
+        await query(queryData);
+    
+        res.status(204).send();
+    } catch(err) {
+        console.error(err);
+        res.status(500).send();
+    }
+})
+
 const PORT = 3000
 
 app.listen(3000, () => {
