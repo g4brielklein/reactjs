@@ -27,7 +27,7 @@ export function Card(props) {
     function reloadPostComments() {
         axios.get(`http://localhost:3000/${post.id}/comments`)
             .then(comments => {
-                console.log(comments.data)
+                setComments(comments.data)
             })
     }
 

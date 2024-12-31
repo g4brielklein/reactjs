@@ -34,6 +34,7 @@ app.get('/posts', async (req, res) => {
                             'profileImageUrl', comment_author."profileImageUrl"
                         )
                     )
+                    ORDER BY comments."createdAt" DESC
                 ) FILTER (WHERE comments.id IS NOT NULL),
                 '[]'::json
             ) AS "comments"
@@ -41,7 +42,8 @@ app.get('/posts', async (req, res) => {
         INNER JOIN users ON users.id = posts."authorId"
         LEFT JOIN comments ON comments."postId" = posts.id
         LEFT JOIN users comment_author ON comment_author.id = comments."authorId"
-        GROUP BY posts.id, users.id;
+        GROUP BY posts.id, users.id
+        ORDER BY posts."createdAt" DESC;
     `)
 
     res.send(posts)
@@ -99,7 +101,19 @@ app.get('/:postId/comments', async (req, res) => {
     const { postId } = req.params;
 
     const queryData = {
-        text: 'SELECT * FROM comments WHERE "postId" = $1;',
+        text: `
+            SELECT comments.*,
+                json_build_object(
+                    'id', users.id,
+                    'name', users.name,
+                    'role', users.role,
+                    'profileImageUrl', users."profileImageUrl"
+                ) AS "user"
+            FROM comments
+            INNER JOIN users ON users.id = comments."authorId"
+            WHERE "postId" = $1
+            ORDER BY comments."createdAt" DESC;
+        `,
         values: [postId],
     };
 
