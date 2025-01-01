@@ -38,6 +38,21 @@ export function Card(props) {
             return alert('Please fill the comment section first')
         }
 
+        const temporaryComment = {
+            temporary: true,
+            content: comment,
+            createdAt: new Date(),
+            id: crypto.randomUUID(),
+            user: {
+                id: '1',
+                name: 'Gabriel Klein',
+                profileImageUrl: 'https://github.com/g4brielklein.png',
+                role: 'Sofware Developer',
+            },
+        };
+
+        setComments([temporaryComment, ...comments]);
+
         axios.post(`${baseApiUrl}/${post.id}/comment`, {
             content: comment,
             authorId: '1'
@@ -51,6 +66,9 @@ export function Card(props) {
 
     const handleDeleteComment = async (commentId) => {
         const itemToRemove = comments.findIndex(item => item.id === commentId)
+
+        // TODO: Remove comment first, than send delete request. If an error occurs, simply run 
+        // already existing function `reloadPostComments`
 
         const response = await axios.delete(`${baseApiUrl}/${commentId}`).catch((err) => {
             console.error(err.response.data)
@@ -99,7 +117,6 @@ export function Card(props) {
                         <Comment 
                             key={comment.id} 
                             comment={comment} 
-                            post={post}
                             onDelete={handleDeleteComment}
                         />
                     )) }
