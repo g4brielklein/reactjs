@@ -52,9 +52,12 @@ export function Card(props) {
     const handleDeleteComment = async (commentId) => {
         const itemToRemove = comments.findIndex(item => item.id === commentId)
 
-        const response = await axios.delete(`${baseApiUrl}/${commentId}`)
+        const response = await axios.delete(`${baseApiUrl}/${commentId}`).catch((err) => {
+            console.error(err.response.data)
+            return alert('Error deleting comment. Try again.')
+        })
 
-        if (itemToRemove !== -1 && response.status === 204) {
+        if (itemToRemove !== -1 && response?.status === 204) {
             comments.splice(itemToRemove, 1)
     
             setComments([...comments])
