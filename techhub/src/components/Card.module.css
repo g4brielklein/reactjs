@@ -70,7 +70,7 @@
 
 .commentWriteArea textarea:focus,
 .commentWriteArea textarea:hover {
-    outline: 1px solid var(--green-light);
+    outline: 1px solid var(--blue-light);
     box-shadow: none;
 }
 
@@ -79,7 +79,7 @@
     padding: 1rem 1.5rem;
     border-radius: 8px;
     color: var(--white);
-    background-color: var(--green);
+    background-color: var(--blue);
     border: none;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -93,7 +93,7 @@
 }
 
 .commentWriteArea > button:not(:disabled):hover {
-    background-color: var(--green-light);
+    background-color: var(--blue-light);
 }
 
 .commentListArea {

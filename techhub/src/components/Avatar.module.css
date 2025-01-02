@@ -8,5 +8,5 @@
 
 .avatar.border {
     border: 3.45px solid var(--gray2);
-    outline: 2px solid var(--green-light);
+    outline: 2px solid var(--blue-light);
 }

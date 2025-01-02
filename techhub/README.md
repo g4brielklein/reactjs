@@ -1,8 +1,12 @@
-# React + Vite
+# Techhub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Techhub is an online mural where is possible to create posts, post comments on them, and manage (edit and delete) those comments.
 
-Currently, two official plugins are available:
+Project created to understant deeper and practice web apps development using ReactJS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Utilized technologies:
+- ReactJS;
+- Vite;
+- Axios;
+- SWR;
+- date-fns.
