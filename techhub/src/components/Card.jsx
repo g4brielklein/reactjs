@@ -67,19 +67,20 @@ export function Card(props) {
     const handleDeleteComment = async (commentId) => {
         const itemToRemove = comments.findIndex(item => item.id === commentId)
 
-        // TODO: Remove comment first, than send delete request. If an error occurs, simply run 
-        // already existing function `reloadPostComments`
-
-        const response = await axios.delete(`${baseApiUrl}/${commentId}`).catch((err) => {
-            console.error(err.response.data)
-            return alert('Error deleting comment. Try again.')
-        })
-
-        if (itemToRemove !== -1 && response?.status === 204) {
+        if (itemToRemove !== -1) {
             comments.splice(itemToRemove, 1)
     
             setComments([...comments])
         }
+
+        await axios.delete(`${baseApiUrl}/${commentId}`)
+            .catch((err) => {
+                console.error(err.response.data)
+
+                alert('Error deleting comment. Try again.')
+
+                reloadPostComments()
+        })
     }
 
     return (
