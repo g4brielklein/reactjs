@@ -12,4 +12,5 @@ Utilized technologies:
 - date-fns.
 
 Demo:
-https://github.com/user-attachments/assets/dbf498e5-66ed-4e31-ae23-5ae9e8009ca7
+
+![demo](https://github.com/user-attachments/assets/108949a1-20b5-402f-9e80-7778ec69b1fd)
