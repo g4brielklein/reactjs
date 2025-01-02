@@ -10,3 +10,6 @@ Utilized technologies:
 - Axios;
 - SWR;
 - date-fns.
+
+Demo:
+https://github.com/user-attachments/assets/dbf498e5-66ed-4e31-ae23-5ae9e8009ca7
