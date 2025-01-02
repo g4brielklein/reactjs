@@ -10,7 +10,7 @@ import { Avatar } from './Avatar'
 import style from './Comment.module.css'
 
 export function Comment(props) {
-    const { comment, post, onDelete } = props;
+    const { comment, onDelete } = props;
     const [likes, setLikes] = useState(comment.likes)
 
     const handleCommentLike = () => {
@@ -35,16 +35,16 @@ export function Comment(props) {
                                 { formatDistanceToNow(comment.createdAt, { addSuffix: true }) }
                             </time>
                         </div>
-                        <button title="Delete comment">
+                        {!comment.temporary && <button title="Delete comment">
                             <Trash 
                                 size={ 24 } 
                                 onClick={() => onDelete(comment.id)}
                             />
-                        </button>
+                        </button>}
                     </div>
                     <p>{ comment.content }</p>
                 </div>
-                <div className={ style.commentInteraction }>
+                {!comment.temporary && <div className={ style.commentInteraction }>
                     <div className={ style.likeArea }>
                         <button title="Like comment" onClick={handleCommentLike}>
                             <ThumbsUp size={ 20 } />
@@ -52,7 +52,7 @@ export function Comment(props) {
                         </button>
                     </div>
                     <span>{ likes }</span>
-                </div>
+                </div>}
             </div>
         </div>
     )
