@@ -35,24 +35,35 @@ export function Comment(props) {
                                 { formatDistanceToNow(comment.createdAt, { addSuffix: true }) }
                             </time>
                         </div>
-                        {!comment.temporary && <button title="Delete comment">
+                        <button 
+                            title={!comment.temporary ? 'Delete comment' : 'Processing comment...'} 
+                            className={!comment.temporary ? '' : style.disabled }
+                        >
                             <Trash 
                                 size={ 24 } 
-                                onClick={() => onDelete(comment.id)}
+                                onClick={() => {
+                                    if (comment.temporary) return
+                                    
+                                    onDelete(comment.id)}
+                                }
                             />
-                        </button>}
+                        </button>
                     </div>
                     <p>{ comment.content }</p>
                 </div>
-                {!comment.temporary && <div className={ style.commentInteraction }>
-                    <div className={ style.likeArea }>
-                        <button title="Like comment" onClick={handleCommentLike}>
+                <div className={ style.commentInteraction }>
+                    <div className={style.likeArea}>
+                        <button 
+                            title={!comment.temporary ? 'Like comment' : 'Processing comment...'} 
+                            className={!comment.temporary ? '' : style.disabled}
+                            onClick={handleCommentLike}
+                        >
                             <ThumbsUp size={ 20 } />
                             <span>Like</span> 
                         </button>
                     </div>
                     <span>{ likes }</span>
-                </div>}
+                </div>
             </div>
         </div>
     )

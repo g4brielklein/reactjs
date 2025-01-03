@@ -43,6 +43,7 @@ export function Card(props) {
             content: comment,
             createdAt: new Date(),
             id: crypto.randomUUID(),
+            likes: 0,
             user: {
                 id: '1',
                 name: 'Gabriel Klein',
@@ -56,7 +57,10 @@ export function Card(props) {
         axios.post(`${baseApiUrl}/${post.id}/comment`, {
             content: comment,
             authorId: '1'
-        }).then(() => {
+        }).catch((err) => {
+            console.error(err);
+            alert('There was an error while commenting. Try again.')
+        }).finally(() => {
             reloadPostComments()
         })
 
