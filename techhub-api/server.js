@@ -10,6 +10,16 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.post('/sessions', (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username !== mockUser.username || password !== mockUser.password) {
+        throw new Error('Username or password not correct')
+    }
+
+    res.send();
+})
+
 app.get('/posts', async (req, res) => {
     const posts = await query(`
         SELECT posts.*,
