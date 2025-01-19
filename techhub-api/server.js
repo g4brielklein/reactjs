@@ -3,6 +3,9 @@ import { randomUUID } from 'node:crypto'
 import { query } from './database/connection.js'
 import cors from 'cors';
 
+import { authConfig } from './configs/auth.js';
+import jwt from 'jsonwebtoken';
+
 import { InternalServerError, ResourceNotFoundError } from './errors.js';
 
 const app = express()
@@ -12,12 +15,23 @@ app.use(cors())
 
 app.post('/sessions', (req, res) => {
     const { username, password } = req.body;
+    const { secret, expiresIn } = authConfig.jwt;
 
-    if (!username !== mockUser.username || password !== mockUser.password) {
-        throw new Error('Username or password not correct')
+    try {
+        if (username !== mockUser.username || password !== mockUser.password) {
+            throw new Error('Username or password not correct')
+        }
+
+        const token = jwt.sign({}, secret, {
+            expiresIn,
+            subject: String(mockUser.id),
+        })
+
+        res.json({ token });
+    } catch (err) {
+        console.error(err)
+        res.status(401).send({ error: err.message })
     }
-
-    res.send();
 })
 
 app.get('/posts', async (req, res) => {
